@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block centro %}
+<div class="container-fluid">
+
+  <div class="main">
+    <!-- Create a Form -->
+    <form method="POST" class="p-4">
+        <!-- Security token by Django -->
+        {% csrf_token %}
+        Tem certeza que quer deletar esse cliente?
+        <input type="submit" class="btn btn-danger" value="Deletar"/>
+        <button class="btn btn-secondary">
+          <a href="{% url 'carros_urls:paginaInicial' %}" class="text-white"> 
+            Cancelar
+          </a>
+        </button>
+    </form>
+  </div>
+
+</div>
+{% endblock %}
