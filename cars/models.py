@@ -8,7 +8,7 @@ class Car(models.Model):
     year = models.CharField(max_length=4)
     motor = models.CharField(max_length=20, null=True, blank=True)
     fuel_type = models.CharField(max_length=100, null=True, blank=True)
-    license_plate = models.CharField(max_length=8, null=True, blank=True)
+    license_plate = models.CharField(max_length=8, null=True, blank=True, unique=True)
     photo = models.FileField(upload_to='carros', blank=True)
 
     def __str__(self):

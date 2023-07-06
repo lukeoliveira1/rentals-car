@@ -72,7 +72,7 @@ class ClientListView(ListView):
 class ClientCreateView(FormView):
     template_name = 'clients/client_form.html'
     form_class = clientForm
-    success_url = reverse_lazy('users_urls:index')
+    success_url = reverse_lazy('cars_urls:index')
 
     def form_valid(self, form):
         form.save()  # Salva o objeto Car no banco de dados

@@ -8,7 +8,7 @@ from django.views.generic import ListView, FormView, UpdateView, DetailView, Del
 # Create your views here.
 def index(request):
     produtos = Car.objects.all()
-    return render(request, "paginaInicial.html", context={'produtos': produtos})
+    return render(request, "index.html", context={'produtos': produtos})
 
 class CarListView(ListView):
     model = Car
