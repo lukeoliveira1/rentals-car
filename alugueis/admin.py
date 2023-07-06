@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import aluguel
+from .models import Rent
 
 # Register your models here.
-admin.site.register(aluguel)
+admin.site.register(Rent)

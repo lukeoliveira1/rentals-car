@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
 from .forms import NewUserForm, clienteForm
-from .models import cliente
+from .models import Client
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
@@ -80,12 +80,12 @@ def cadastrarCliente(request):
         return render(request, "clientes/formClientes.html", context)
 
 def listarClientes(request):
-    clientes = cliente.objects.all()
+    clientes = Client.objects.all()
     return render(request, "clientes/listarClientes.html", context={'clientes': clientes})
 
 def deletarCliente(request, id):
  
-    obj = get_object_or_404(cliente, id = id)
+    obj = get_object_or_404(Client, id = id)
  
     if request.method =="POST":
 

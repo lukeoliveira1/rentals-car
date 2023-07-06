@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
-from alugueis.models import aluguel
+from alugueis.models import Rent
 from .forms import aluguelForm
 
 # Create your views here.
@@ -22,12 +22,12 @@ def cadastrarLocacao(request):
         return render(request, "aluguel/formAlugar.html", context)
 
 def listarLocacoes(request):
-    locacoes = aluguel.objects.all()
+    locacoes = Rent.objects.all()
     return render(request, "aluguel/listarLocacoes.html", context={'locacoes': locacoes})
 
 def deletarLocacao(request, id):
   
-    obj = get_object_or_404(aluguel, id = id)
+    obj = get_object_or_404(Rent, id = id)
  
  
     if request.method =="POST":

@@ -1,14 +1,14 @@
 from django.db import models
-from carros.models import carro
-from usuarios.models import cliente
+from carros.models import Car
+from usuarios.models import Client
 
 # Create your models here.
-class aluguel(models.Model):
-    data_retirada = models.DateField()
-    data_entrega = models.DateField()
-    valor = models.FloatField()
-    cliente =  models.OneToOneField(cliente, on_delete=models.CASCADE)
-    carro =  models.OneToOneField(carro, on_delete=models.CASCADE)
+class Rent(models.Model):
+    pickup_date = models.DateField()
+    delivery_date = models.DateField()
+    value = models.FloatField()
+    client =  models.OneToOneField(Client, on_delete=models.CASCADE)
+    car =  models.OneToOneField(Car, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.carro.modelo
+        return self.car.model

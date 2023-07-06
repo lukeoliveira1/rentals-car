@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.models import ModelForm
-from .models import cliente
+from .models import Client
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -21,5 +21,14 @@ class NewUserForm(UserCreationForm):
 class clienteForm(ModelForm):
 
     class Meta:
-        model = cliente
+        model = Client
         fields = '__all__'
+	
+        labels = {
+            'name': 'Nome',
+            'cpf': 'CPF',
+            'cnh': 'CNH',
+            'email': 'E-mail',
+            'phone_number': 'Telefone',
+            'address': 'Endereço',
+        }
