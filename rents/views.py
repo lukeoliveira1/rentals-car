@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
-from alugueis.models import Rent
+from rents.models import Rent
 from .forms import aluguelForm
 
 # Create your views here.

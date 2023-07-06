@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
-from carros.models import Car
+from cars.models import Car
 from .forms import carroForm
 
 # Create your views here.

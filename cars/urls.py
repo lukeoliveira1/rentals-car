@@ -1,9 +1,9 @@
 from django.urls import path
-from carros.views import paginaInicial, detalheCarro, cadastrarCarro, deletarCarro
+from cars.views import paginaInicial, detalheCarro, cadastrarCarro, deletarCarro
 from django.conf import settings
 from django.conf.urls.static import static
 
-app_name = 'carros_urls'
+app_name = 'cars_urls'
 
 urlpatterns = [
     path('', paginaInicial, name="paginaInicial"),

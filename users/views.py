@@ -16,7 +16,7 @@ def register(request):
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
-			return redirect("carros_urls:paginaInicial")
+			return redirect("cars_urls:paginaInicial")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	
 	form = NewUserForm()	
@@ -33,7 +33,7 @@ def my_login(request):
 
 			if user is not None:
 				login(request, user) 
-				return redirect("carros_urls:paginaInicial") 
+				return redirect("cars_urls:paginaInicial") 
 			else:
 				messages.error(request,"Invalid username or password.")
 		else:
@@ -44,7 +44,7 @@ def my_login(request):
 def logout_request(request):
 	logout(request)
 	messages.info(request, "Você realizou logout com sucesso!") 
-	return redirect("carros_urls:paginaInicial")
+	return redirect("cars_urls:paginaInicial")
 
 def register_request(request):
 	if request.method == "POST":
@@ -53,7 +53,7 @@ def register_request(request):
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
-			return redirect("carros_urls:paginaInicial")
+			return redirect("cars_urls:paginaInicial")
 		messages.error(request, "Unsuccessful registration. Invalid information.")	
 	form = NewUserForm()
 	return render (request=request, template_name="cadastros/cadastrarUsuario.html", context={"register_form":form})

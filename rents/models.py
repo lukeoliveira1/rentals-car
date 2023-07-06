@@ -1,6 +1,6 @@
 from django.db import models
-from carros.models import Car
-from usuarios.models import Client
+from cars.models import Car
+from users.models import Client
 
 # Create your models here.
 class Rent(models.Model):
