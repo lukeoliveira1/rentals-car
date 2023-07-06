@@ -18,7 +18,7 @@ class NewUserForm(UserCreationForm):
 			user.save()
 		return user
 
-class clienteForm(ModelForm):
+class clientForm(ModelForm):
 
     class Meta:
         model = Client

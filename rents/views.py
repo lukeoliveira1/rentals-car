@@ -1,40 +1,37 @@
-from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
+from django.views.generic import ListView, FormView, UpdateView, DetailView, DeleteView
+from django.urls import reverse_lazy
 from rents.models import Rent
-from .forms import aluguelForm
+from .forms import rentForm
 
 # Create your views here.
-def cadastrarLocacao(request):
-
-    if request.method == 'GET':
-        form = aluguelForm()
-        context = {'primeiroForm' : form}
-        print('--Entrou')
-        return render(request, "aluguel/formAlugar.html", context)
+class RentListView(ListView):
+    model = Rent
+    queryset = Rent.objects.all()
+    template_name = "rents/rent_list.html"
     
-    else:
-        form = aluguelForm(request.POST) 
+class RentCreateView(FormView):
+    template_name = 'rents/rent_form.html'
+    form_class = rentForm
+    success_url = reverse_lazy('rents_urls:index')
 
-        if  form.is_valid(): 
-            form.save()
-            form = aluguelForm()
+    def form_valid(self, form):
+        form.save()  # Salva o objeto Rent no banco de dados
+        return super().form_valid(form)
 
-        context = {'primeiroForm' : form}
-        return render(request, "aluguel/formAlugar.html", context)
+class RentUpdateView(UpdateView):
+    model = Rent
+    form_class = rentForm
+    template_name = 'rents/rent_form.html'
+    success_url = reverse_lazy('rents_urls:list')
 
-def listarLocacoes(request):
-    locacoes = Rent.objects.all()
-    return render(request, "aluguel/listarLocacoes.html", context={'locacoes': locacoes})
+class RentDetailView(DetailView):
+    model = Rent
+    queryset = Rent.objects.all()
 
-def deletarLocacao(request, id):
-  
-    obj = get_object_or_404(Rent, id = id)
- 
- 
-    if request.method =="POST":
+class RentDeleteView(DeleteView):
+    model = Rent
+    slug_field = 'slug'  # campo de slug no modelo Rent
+    slug_url_kwarg = 'slug'  # nome do parâmetro na URL
+    success_url = reverse_lazy('cars_urls:index')
+    template_name = 'rents/rent_confirm_delete.html'
 
-        obj.delete()
-
-        return HttpResponseRedirect("/")
- 
-    return render(request, "aluguel/formDelete.html")
-    

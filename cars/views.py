@@ -1,41 +1,42 @@
-from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from cars.models import Car
-from .forms import carroForm
+from .forms import carForm
+
+from django.views.generic import ListView, FormView, UpdateView, DetailView, DeleteView
 
 # Create your views here.
-def paginaInicial(request):
+def index(request):
     produtos = Car.objects.all()
     return render(request, "paginaInicial.html", context={'produtos': produtos})
 
-def detalheCarro(request, id_produto):
-    print("O carro que você selecionou:", id_produto)
-    produtos = Car.objects.get(id=id_produto)
-    return render(request, "carros\detalheCarro.html", context={'produto': produtos})
-
-
-def cadastrarCarro(request):
-    if request.method == 'POST':
-        form = carroForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            produtos = Car.objects.all()
-            context={'produtos': produtos}
-            return render(request, "paginaInicial.html", context)
-
-    else:
-        form = carroForm
-        context = {'formCarros': form}
-        return render(request, "carros/formCarros.html", context)
-
-def deletarCarro(request, id):
-  
-    obj = get_object_or_404(Car, id = id)
- 
-    if request.method =="POST":
-
-        obj.delete()
-
-        return HttpResponseRedirect("/")
- 
-    return render(request, "carros/formDelete.html")
+class CarListView(ListView):
+    model = Car
+    queryset = Car.objects.all()
+    template_name = "paginaInicial.html"
     
+class CarCreateView(FormView):
+    template_name = 'cars/car_form.html'
+    form_class = carForm
+    success_url = reverse_lazy('cars_urls:index')
+
+    def form_valid(self, form):
+        form.save()  # Salva o objeto Car no banco de dados
+        return super().form_valid(form)
+
+class CarUpdateView(UpdateView):
+    model = Car
+    form_class = carForm
+    template_name = 'car_form.html'
+    success_url = reverse_lazy('car_urls:list')
+
+class CarDetailView(DetailView):
+    model = Car
+    queryset = Car.objects.all()
+
+class CarDeleteView(DeleteView):
+    model = Car
+    slug_field = 'slug'  # campo de slug no modelo Car
+    slug_url_kwarg = 'slug'  # nome do parâmetro na URL
+    success_url = reverse_lazy('cars_urls:index')
+    template_name = 'cars/car_confirm_delete.html'

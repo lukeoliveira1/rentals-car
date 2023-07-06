@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponseRedirect
-from .forms import NewUserForm, clienteForm
+from django.urls import reverse_lazy
+from .forms import NewUserForm, clientForm
 from .models import Client
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm 
+
+from django.views.generic import ListView, FormView, UpdateView, DetailView, DeleteView
 
 # Create your views here.
 
@@ -61,37 +64,33 @@ def register_request(request):
 
 #cliente
 
-def cadastrarCliente(request):
-
-    if request.method == 'GET':
-        form = clienteForm()
-        context = {'formCliente' : form}
-        print('--Entrou')
-        return render(request, "clientes/formClientes.html", context)
+class ClientListView(ListView):
+    model = Client
+    queryset = Client.objects.all()
+    template_name = "clients/client_list.html"
     
-    else:
-        form = clienteForm(request.POST) 
+class ClientCreateView(FormView):
+    template_name = 'clients/client_form.html'
+    form_class = clientForm
+    success_url = reverse_lazy('users_urls:index')
 
-        if  form.is_valid(): 
-            form.save()
-            form = clienteForm()
+    def form_valid(self, form):
+        form.save()  # Salva o objeto Car no banco de dados
+        return super().form_valid(form)
 
-        context = {'formCliente' : form}
-        return render(request, "clientes/formClientes.html", context)
+class ClientUpdateView(UpdateView):
+    model = Client
+    form_class = clientForm
+    template_name = 'clients/client_form.html'
+    success_url = reverse_lazy('users_urls:list')
 
-def listarClientes(request):
-    clientes = Client.objects.all()
-    return render(request, "clientes/listarClientes.html", context={'clientes': clientes})
+class ClientDetailView(DetailView):
+    model = Client
+    queryset = Client.objects.all()
 
-def deletarCliente(request, id):
- 
-    obj = get_object_or_404(Client, id = id)
- 
-    if request.method =="POST":
-
-        obj.delete()
-
-        return HttpResponseRedirect("/")
- 
-    return render(request, "clientes/formDelete.html")
-    
+class ClientDeleteView(DeleteView):
+    model = Client
+    slug_field = 'slug'  # campo de slug no modelo Car
+    slug_url_kwarg = 'slug'  # nome do parâmetro na URL
+    success_url = reverse_lazy('cars_urls:index')
+    template_name = 'clients/client_confirm_delete.html'

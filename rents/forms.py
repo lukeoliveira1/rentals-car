@@ -2,7 +2,7 @@ from .models import Rent
 from django import forms
 from django.forms import TextInput
 
-class aluguelForm(forms.ModelForm):
+class rentForm(forms.ModelForm):
 
     class Meta:
         model = Rent

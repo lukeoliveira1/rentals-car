@@ -13,26 +13,26 @@ Página Inicial
         
     <div class="row">
     
-        {% for objeto in produtos %}
+        {% for car in object_list %}
 
         <div class="col mb-5">
 
             <div class="card" style="width: 18rem;">
                 <!-- Product image-->
-                <img class="card-img-top" src="/media/{{objeto.foto}}" height="200px" alt="..." />
+                <img class="card-img-top" src="/media/{{car.photo}}" height="200px" alt="..." />
                 <!-- Product details-->
                 <div class="card-body p-4">
                     <div class="text-center">
                         <!-- Product name-->
-                        <h5 class="fw-bolder">{{ objeto.modelo }}</h5>
+                        <h5 class="fw-bolder">{{ car.model }}</h5>
                         <!-- Product price-->
-                        {{ objeto.ano }}
+                        {{ car.year }}
                     </div>
                 </div>
                 <!-- Product actions-->
                 <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div class="text-center"><a class="btn btn-primary mt-auto"
-                            href="{% url 'carros_urls:detalheCarro' objeto.id %}">Detalhes</a></div>
+                            href="{% url 'cars_urls:detail' car.id %}">Detalhes</a></div>
             </div>
 
         </div>
