@@ -19,7 +19,7 @@ Listar Locações
 
           <div class="card" style="width: 18rem;">
             <div class="card-header">
-              client: {{ client.name }}
+              Cliente: {{ client.name }}
               <a href="{% url 'users_urls:delete' client.id %}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -30,7 +30,7 @@ Listar Locações
             <ul class="list-group list-group-flush">
               <li class="list-group-item">CPF: {{ client.cpf }}</li>
               <li class="list-group-item"> CNH: {{ client.cnh }} </li>
-              <li class="list-group-item"> Telefone: {{ client.phone }}</li>
+              <li class="list-group-item"> Telefone: {{ client.phone_number }}</li>
               <li class="list-group-item">E-mail: {{ client.email }}</li>
               <li class="list-group-item">Endereço: {{ client.address }}</li>
             </ul>

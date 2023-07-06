@@ -12,7 +12,7 @@ class RentListView(ListView):
 class RentCreateView(FormView):
     template_name = 'rents/rent_form.html'
     form_class = rentForm
-    success_url = reverse_lazy('rents_urls:index')
+    success_url = reverse_lazy('rents_urls:list')
 
     def form_valid(self, form):
         form.save()  # Salva o objeto Rent no banco de dados

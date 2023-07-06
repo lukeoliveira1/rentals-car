@@ -13,7 +13,7 @@ def index(request):
 class CarListView(ListView):
     model = Car
     queryset = Car.objects.all()
-    template_name = "paginaInicial.html"
+    template_name = "cars/car_list.html"
     
 class CarCreateView(FormView):
     template_name = 'cars/car_form.html'
