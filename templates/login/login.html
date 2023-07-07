@@ -9,18 +9,16 @@ Registrar
 {% endblock %}
 
 {% block centro %}
-<div class="container-fluid">
+<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1>Login</h1>
 
-    <h1>Login</h1>
-
-    <form action="." method="POST">
-
-        {% csrf_token %}
-
-        {{ form|crispy }}
-
-        <button type="submit" class="btn btn-primary mb-4">Entrar</button>
-    </form>
-
+        <form action="." method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary mb-4">Entrar</button>
+        </form>
+    </div>
 </div>
+
 {% endblock %}

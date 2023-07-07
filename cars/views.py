@@ -27,8 +27,8 @@ class CarCreateView(FormView):
 class CarUpdateView(UpdateView):
     model = Car
     form_class = carForm
-    template_name = 'car_form.html'
-    success_url = reverse_lazy('car_urls:list')
+    template_name = 'cars/car_form.html'
+    success_url = reverse_lazy('cars_urls:list')
 
 class CarDetailView(DetailView):
     model = Car
