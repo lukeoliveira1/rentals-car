@@ -6,7 +6,7 @@
 Listar Carros{% endblock %}
 
 {% block centro %}
-<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+<div class="container-fluid d-flex align-items-center justify-content-center">
     <div class="text-center">
 
     <h2 class="text-center mb-4"> Carros Cadastrados</h2>
@@ -41,6 +41,9 @@ Listar Carros{% endblock %}
 
     {% endfor %}
     </div>
+
+    {% include 'partials/pagination.html' %}
+      
 </div>
 
 </div>

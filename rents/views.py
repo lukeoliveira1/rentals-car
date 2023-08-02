@@ -8,7 +8,8 @@ class RentListView(ListView):
     model = Rent
     queryset = Rent.objects.all()
     template_name = "rents/rent_list.html"
-    
+    paginate_by = 4
+
 class RentCreateView(FormView):
     template_name = 'rents/rent_form.html'
     form_class = rentForm

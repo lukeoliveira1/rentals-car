@@ -7,7 +7,7 @@ Listar Locações
 {% endblock %}
 
 {% block centro %}
-<div class="container-fluid d-flex align-items-center justify-content-center vh-100">
+<div class="container-fluid d-flex align-items-center justify-content-center">
   <div class="text-center">
 
     <h1 class="text-align-center pb-4">Clientes Cadastrados</h1>
@@ -42,7 +42,11 @@ Listar Locações
       {% endfor %}
     
     </div>
+
+    {% include 'partials/pagination.html' %}
+    
     </div>
     
 </div>
 {% endblock %}
+

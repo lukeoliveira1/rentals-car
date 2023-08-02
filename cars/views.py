@@ -14,6 +14,7 @@ class CarListView(ListView):
     model = Car
     queryset = Car.objects.all()
     template_name = "cars/car_list.html"
+    paginate_by = 4
     
 class CarCreateView(FormView):
     template_name = 'cars/car_form.html'

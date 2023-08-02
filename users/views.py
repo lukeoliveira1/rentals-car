@@ -11,7 +11,6 @@ from django.views.generic import ListView, FormView, UpdateView, DetailView, Del
 # Create your views here.
 
 #user
-
 class RegisterView(View):
     def get(self, request):
         form = NewUserForm()
@@ -78,6 +77,7 @@ class ClientListView(ListView):
     model = Client
     queryset = Client.objects.all()
     template_name = "clients/client_list.html"
+    paginate_by = 4
     
 class ClientCreateView(FormView):
     template_name = 'clients/client_form.html'
