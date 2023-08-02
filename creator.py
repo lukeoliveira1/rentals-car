@@ -54,7 +54,13 @@ def create_rents(num_instances):
         value = round(random.uniform(100, 1000), 2)
 
         client = Client.objects.order_by("?").first()  # randomly select an existing customer
-        car = Car.objects.order_by("?").first()  # randomly select an existing car
+        available_cars = Car.objects.filter(rent__isnull=True)  # filter only car not associated with any Rent instance
+
+        if not available_cars:  
+            print("Todas as opções de carros foram utilizadas. Saindo do loop.")
+            break
+
+        car = random.choice(available_cars)  # randomly select an existing car from available cars
 
         rent = Rent.objects.create(
             pickup_date=pickup_date,
@@ -65,4 +71,4 @@ def create_rents(num_instances):
         )
         rent.save()
 
-# create_rents(5)  
+create_rents(5)
