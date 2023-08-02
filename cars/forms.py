@@ -2,7 +2,6 @@ from .models import Car
 from django.forms import ModelForm
 
 class carForm(ModelForm):
-
     class Meta:
         model = Car
         fields = '__all__'
@@ -16,3 +15,8 @@ class carForm(ModelForm):
             'fuel_type': 'Tipo de Combustível',
             'license_plate': 'Placa',
         }
+
+class carBulkUpdate(ModelForm):
+    class Meta:
+        model = Car
+        fields = ['motor',]

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from cars.models import Car
-from .forms import carForm
+from .forms import carBulkUpdate, carForm
 
 from django.views.generic import ListView, FormView, UpdateView, DetailView, DeleteView
 
@@ -41,3 +41,13 @@ class CarDeleteView(DeleteView):
     slug_url_kwarg = 'slug'  # nome do parâmetro na URL
     success_url = reverse_lazy('cars_urls:index')
     template_name = 'cars/car_confirm_delete.html'
+
+class CarBulkUpdate(FormView):
+    template_name = 'cars/car_bulk_update.html'
+    form_class = carBulkUpdate
+    success_url = reverse_lazy('cars_urls:index')
+
+    def form_valid(self, form):
+        motor = form.cleaned_data['motor']
+        Car.objects.update(motor=motor)
+        return super().form_valid(form)

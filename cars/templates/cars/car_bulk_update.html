@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block titulo %}Bulk Update de Carros{% endblock %}
+
+{% block centro %}
+<div class="container p-4 col-xs-6 col-sm-4 vh-100">
+
+
+  <h1 class="text-center pt-4">Bulk Update de Carros</h1>
+  <p class="lead text-center pt-4"> Preencha o campo abaixo:</p>
+
+  <form action="." enctype='multipart/form-data' method="POST" class="p-4">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary mb-4 mt-4">Atualizar Motores</button>
+    </div>
+
+  </form>
+
+</div>
+{% endblock %}
